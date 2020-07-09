@@ -26,7 +26,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return 'form per inserimento nuovo studente';
+        // return 'form per inserimento nuovo studente';
+        return view('students.create');
     }
 
     /**
@@ -46,9 +47,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Student $student) //si può passare alla funzione il model al posto dell'id
     {
-        $student = Student::find($id);
+        // $student = Student::find($id); la elimino come conseguenza del parametro model passato alla funzione
         // dd($student);
         return view('students.show', compact('student'));
     }
