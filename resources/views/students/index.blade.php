@@ -5,6 +5,13 @@
         <div class="container">
        <div class="row">
            <div class="col-12">
+               <div class="d-flex justify-content-between align-items-center">
+                   <h1 class="mt-3 mb-3">students list</h1>
+                   <a class="btn btn-primary"
+                   href="{{ route('students.create') }}">
+                       New Student
+                   </a>
+                 </div>
                <table class="table">
                    <thead>
                        <tr>
