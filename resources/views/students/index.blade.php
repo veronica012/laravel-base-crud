@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('page-title', 'Students list')
 @section('content')
-    @foreach ($students as $student)
         <div class="container">
        <div class="row">
            <div class="col-12">
@@ -41,5 +40,4 @@
            </div>
        </div>
    </div>
-    @endforeach
 @endsection
