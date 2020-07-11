@@ -23,7 +23,7 @@
                        </tr>
                    </thead>
                    <tbody>
-                       @foreach ($students as $student)
+                       @forelse ($students as $student)
                            <tr>
                                <td>{{ $student->id }}</td>
                                <td>{{ $student->name }}</td>
@@ -32,9 +32,22 @@
                                <td>{{ $student->email }}</td>
                                <td>
                                    <a class="btn btn-info" href="{{ route('students.show', ['student' => $student->id])}}">Info</a>
+                                   <a class="btn btn-warning btn-sm" href="{{ route('students.edit', ['student' => $student->id]) }}">
+                                       Change
+                                   </a>
+                                   <form action="{{ route('students.destroy', ['student' => $student->id]) }}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                                    </form>
                                </td>
                            </tr>
-                       @endforeach
+                       @empty
+                           <tr>
+                               <td colspan="4">There are no students</td>
+                           </tr>
+
+                       @endforelse
                    </tbody>
                </table>
            </div>

@@ -38,11 +38,19 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        //nella funzione store oltre a salvare i nuovi dati si esegue la validazione dei dati inseriti
+        $request->validate([
+            'name' => 'required',
+            'lastname' => 'required',
+            // 'matricola' => 'required|matricola|unique:students',
+            'email' => 'required|email|unique:students',
+        ]);
+
         $dati = $request->all();
-       $newStudent = new Student();
-       $newStudent->fill($dati);
-       $newStudent->save();
-       return redirect()->route('students.index');
+        $newStudent = new Student();
+        $newStudent->fill($dati);
+        $newStudent->save();
+        return redirect()->route('students.index');
     }
 
     /**
@@ -67,7 +75,11 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::find($id);
+        if($student) {
+            return view('students.edit', compact('student'));
+        }
+        return abort('404');
     }
 
     /**
@@ -79,7 +91,20 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //la funzione update è incocata quando i dati già esistenti devono essere modificati anche in questo caso si esegue la validazione
+        $request->validate([
+            'name' => 'required',
+            'lastname' => 'required',
+            // 'matricola' => 'required|matricola|unique:students',
+            'email' => 'required|email|unique:students'
+        ]);
+
+        $dati = $request->all();
+        $student=Student::find($id);
+        if($student) {
+            $student->update($dati);
+        }
+        return redirect()->route('students.index');
     }
 
     /**
@@ -90,6 +115,11 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //la funzione destroy è invocata per eliminare i dati
+        $student = Student::find($id);
+        if($student) {
+            $student->delete();
+        }
+        return redirect()->route('students.index');
     }
 }
