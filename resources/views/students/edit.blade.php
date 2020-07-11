@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="lastname">Lastname</label>
-                        <textarea type="text" name="lastname" class="form-control" id="lastname" placeholder="Student's lastname">{{ old('lastname', $student->lastname) }}</textarea>
+                        <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Student's lastname" value = "{{ old('lastname', $student->lastname) }}">
                         @error('lastname')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
